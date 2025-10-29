@@ -10,4 +10,3 @@ print("I'm thinking of a number between 1 and 100.")
 dif = input("Choose a difficulty. Type 'easy' or 'hard'.").lower() #set the difficulty
 
 lives = set_lives(dif)
-print(lives)
