@@ -38,7 +38,6 @@ if ans == "y":
                             user_hand[x] = 1         #if user was dealt an ace(11) in his hand and goes over 21 he can chose to play use the ace as a one
                 else:
                     print("You busted...your cards:",user_hand)  
-                    game = False   
                     bust1= True 
 
     while cpu_score < 17:
@@ -51,13 +50,20 @@ if ans == "y":
     if  cpu_score > 21:
         bust2 = True
 
-    if user_score > cpu_score and bust1 == False:
-        print("User score:",user_score)
-        print("Cpu score:",cpu_score)
-        print("User Wins!!!")                           #user wins if he has a bigger score and hasnt busted
-    elif user_score < cpu_score and bust2 == False:
-        print("User score:",user_score)
-        print("Cpu score:",cpu_score)
-        print("Cpu Wins!!!")                    #cpu wins if he has a bigger score and hasnt busted
-    else:
-        print("Draw...")    #every other case is a draw
+
+    if (bust1 == True and bust2 == True) or (user_score == cpu_score):
+        print("Draw...")
+    elif bust1 == False:
+        gap1 = abs(21 - user_score)
+        gap2 = abs(21 - cpu_score)
+        if gap1 < gap2:
+            print("User score:",user_score)
+            print("Cpu score:",cpu_score)
+            print("User Wins!!!") 
+    elif bust2 == False:
+        gap1 = abs(21 - user_score)
+        gap2 = abs(21 - cpu_score)
+        if gap2 < gap1:
+            print("User score:",user_score)
+            print("Cpu score:",cpu_score)
+            print("Cpu Wins!!!") 
