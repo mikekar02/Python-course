@@ -78,24 +78,30 @@ while machine == True:
 
         if coffee == True:
             print("Insert coins:")
-            one_cents = input("1 cents:")
-            five_cents = input("5 cents:")
-            ten_cents = input("10 cents:")
-            fifteen_cents = input("15 cents:")
+            one_cents = float(input("1 cents:"))
+            five_cents = float(input("5 cents:"))
+            ten_cents = float(input("10 cents:"))
+            fifteen_cents = float(input("15 cents:"))
 
-            total = one_cents+(five_cents * 0.05)+(ten_cents * 0.1)+(fifteen_cents * 0.15) #5 Process coins.
+            total = (one_cents * 0.01)+(five_cents * 0.05)+(ten_cents * 0.1)+(fifteen_cents * 0.15) #5 Process coins.
 
-            if total >= menu[ans]["cost"]:
-                change = total - menu[ans]["cost"]
-                print("Here is",change,"in change.")
-                print("Here is your latte enjoy!")
-                resources["water"] = resources["water"] - menu[ans]["water"]
-                resources["milk"] = resources["milk"] - menu[ans]["milk"]
-                resources["coffee"] = resources["coffee"] - menu[ans]["coffee"]
+            if total >= menu[ans]["cost"]:#6 Check transaction successful?
+                change = round(total - menu[ans]["cost"],2)
+                if ans == "espresso":
+                    resources["water"] = resources["water"] - menu[ans]["ingredients"]["water"]
+                    resources["coffee"] = resources["coffee"] - menu[ans]["ingredients"]["coffee"]
+                    print("Here is",change,"in change.")
+                    print("Here is your latte enjoy!")
+                else:
+                    resources["water"] = resources["water"] - menu[ans]["ingredients"]["water"]
+                    resources["milk"] = resources["milk"] - menu[ans]["ingredients"]["milk"]
+                    resources["coffee"] = resources["coffee"] - menu[ans]["ingredients"]["coffee"]#7 Make Coffee.
+                    print("Here is",change,"in change.")
+                    print("Here is your latte enjoy!")
             else:
                 print("“Sorry that's not enough money. Money refunded.")
 
 
 
-#6 Check transaction successful?
-#7 Make Coffee.
+
+
