@@ -1,4 +1,4 @@
-MENU = {
+menu = {
     "espresso": {
         "ingredients": {
             "water": 50,
@@ -36,6 +36,7 @@ coffee = True
 
 while machine == True:
     ans = input("What would you like? (espresso/latte/cappuccino):").lower() #1 Prompt user by asking “What would you like? (espresso/latte/cappuccino):”
+    print(ans)
 
     if ans != "off": #2 Turn off the Coffee Machine by entering “off” to the prompt.
 
@@ -45,19 +46,56 @@ while machine == True:
             print("Coffee: \n",resources["coffee"])
             print("Money: \n",resources["money"]) #3 Print report
 
-    if ans == "latte":
-        if resources["water"] < MENU["latte"]["ingredients"]["water"]:
-            print("Sorry there is not enough water.")
-            coffee = False
-        elif resources["milk"] < MENU["latte"]["ingredients"]["milk"]:
-            print("Sorry there is not enough milk.")
-            coffee = False
-        elif resources["coffee"] < MENU["latte"]["ingredients"]["coffee"]:
-            print("Sorry there is not enough coffee.")
-            coffee = False #4 Check resources sufficient?
+        if ans == "espresso":
+            if resources["water"] < menu["espresso"]["ingredients"]["water"]:
+                print("Sorry there is not enough water.")
+                coffee = False
+            elif resources["coffee"] < menu["espresso"]["ingredients"]["coffee"]:
+                print("Sorry there is not enough coffee.")
+                coffee = False 
+
+        elif ans == "latte":
+            if resources["water"] < menu["latte"]["ingredients"]["water"]:
+                print("Sorry there is not enough water.")
+                coffee = False
+            elif resources["milk"] < menu["latte"]["ingredients"]["milk"]:
+                print("Sorry there is not enough milk.")
+                coffee = False
+            elif resources["coffee"] < menu["latte"]["ingredients"]["coffee"]:
+                print("Sorry there is not enough coffee.")
+                coffee = False 
+
+        elif ans == "cappuccino":
+            if resources["water"] < menu["cappuccino"]["ingredients"]["water"]:
+                print("Sorry there is not enough water.")
+                coffee = False
+            elif resources["milk"] < menu["cappuccino"]["ingredients"]["milk"]:
+                print("Sorry there is not enough milk.")
+                coffee = False
+            elif resources["coffee"] < menu["cappuccino"]["ingredients"]["coffee"]:
+                print("Sorry there is not enough coffee.")
+                coffee = False  #4 Check resources sufficient?
+
+        if coffee == True:
+            print("Insert coins:")
+            one_cents = input("1 cents:")
+            five_cents = input("5 cents:")
+            ten_cents = input("10 cents:")
+            fifteen_cents = input("15 cents:")
+
+            total = one_cents+(five_cents * 0.05)+(ten_cents * 0.1)+(fifteen_cents * 0.15) #5 Process coins.
+
+            if total >= menu[ans]["cost"]:
+                change = total - menu[ans]["cost"]
+                print("Here is",change,"in change.")
+                print("Here is your latte enjoy!")
+                resources["water"] = resources["water"] - menu[ans]["water"]
+                resources["milk"] = resources["milk"] - menu[ans]["milk"]
+                resources["coffee"] = resources["coffee"] - menu[ans]["coffee"]
+            else:
+                print("“Sorry that's not enough money. Money refunded.")
 
 
 
-#5 Process coins.
 #6 Check transaction successful?
 #7 Make Coffee.
